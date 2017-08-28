@@ -1,0 +1,28 @@
+<h1>Edit User</h1>
+
+<%= form_for @user do |f| %>
+  <fieldset>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :firstname, "First Name" %>
+    <%= f.text_field :firstname %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :lastname, "Last Name" %>
+    <%= f.text_field :lastname %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :dob %>
+    <%= f.date_field :dob %>
+  </fieldset>
+  <%= f.submit %>
+
+  <%= link_to "Delete Profile", user_path, :method => 'delete', :data => {:confirm => 'Are you sure you wish to delete your account? It cannot be reversed.'}  %>
+
+<% end %>

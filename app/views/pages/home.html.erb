@@ -1,0 +1,8 @@
+<h1>Meme_App</h1>
+
+<% if @current_user.present? %>
+  <p>Welcome back <%= @current_user.username %></p>
+  <% if @current_user.posts.first.present? %>
+    <p><%= @current_user.posts.first.content %></p>
+  <% end %>
+<% end %>
