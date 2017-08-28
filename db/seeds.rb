@@ -6,13 +6,12 @@ u2 = User.create :username => 'nothitler', :firstname => 'Kane', :lastname => 'M
 
 Post.destroy_all
 
-p1 = Post.new :content => 'Wtf I love this website!', :image => ""
-p2 = Post.new :content => 'This is great', :image => ""
+p1 = Post.create :content => 'Wtf I love this website!', :image => ""
+p2 = Post.create :content => 'This is great', :image => ""
 
 Comment.destroy_all
-# c1 = Post.new :content => 'Great Post! Totally agree', :image => ""
-# c2 = Post.new :content => 'This sucks!', :image => ""
-
+c1 = Comment.create :content => 'Great Post! Totally agree'
+c2 = Comment.create :content => 'This sucks!'
 
 
 
@@ -25,7 +24,8 @@ Comment.destroy_all
 u1.posts << p1
 u2.posts << p2
 
-u1.save
-u2.save
-p1.save
-p2.save
+u1.comments << c1
+u2.comments << c2
+
+p1.comments << c1
+p2.comments << c2

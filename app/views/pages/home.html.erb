@@ -2,7 +2,32 @@
 
 <% if @current_user.present? %>
   <p>Welcome back <%= @current_user.username %></p>
-  <% if @current_user.posts.first.present? %>
-    <p><%= @current_user.posts.first.content %></p>
+
+  <%= form_for @post do |f|  %>
+
+    <%= f.text_field :content, :placeholder => 'Post a meme', :class => 'post_text_field' %>
+
+    <%= f.submit "Post" %>
+
+  <% end %>
+
+  <% if @current_user.posts.last.present? %>
+    <div class="post">
+      <% @current_user.posts.each do |post| %>
+        <p><%= post.content %></p>
+        <% if post.comments.last.present? %>
+          <ul>
+            <% post.comments.each do |comment| %>
+              <li><%= comment.content %> | By <%= comment.user.username %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <%= form_for @comment do |f| %>
+          <%= hidden_field_tag :post_id, post.id %>
+          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment_text_field' %>
+          <%= f.submit "Comment" %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

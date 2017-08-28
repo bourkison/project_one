@@ -10,11 +10,24 @@
 #           PATCH  /users/:id(.:format)      users#update
 #           PUT    /users/:id(.:format)      users#update
 #           DELETE /users/:id(.:format)      users#destroy
+#     posts GET    /posts(.:format)          posts#index
+#           POST   /posts(.:format)          posts#create
+#  new_post GET    /posts/new(.:format)      posts#new
+# edit_post GET    /posts/:id/edit(.:format) posts#edit
+#      post GET    /posts/:id(.:format)      posts#show
+#           PATCH  /posts/:id(.:format)      posts#update
+#           PUT    /posts/:id(.:format)      posts#update
+#           DELETE /posts/:id(.:format)      posts#destroy
+#     login GET    /login(.:format)          session#new
+#           POST   /login(.:format)          session#create
+#           DELETE /login(.:format)          session#destroy
 #
 
 Rails.application.routes.draw do
   root :to => 'pages#home'
   resources :users
+  resources :posts
+  resources :comments
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'
