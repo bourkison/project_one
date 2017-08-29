@@ -1,0 +1,44 @@
+<!-- THIS FILE IS THE PROFILE FOR ALL USERS. -->
+
+<h1><%= @user.firstname %> <%= @user.lastname %></h1>
+
+<% if @current_user.present? && @current_user.id == @user.id %>
+  <p><b>New Post:</b></p>
+  <%= form_for @post do |f|  %>
+    <%= f.text_field :content, :placeholder => 'Post a meme', :class => 'post_text_field' %>
+    <%= f.submit "Post" %>
+  <% end %>
+<% end %>
+
+
+<p><b>Posts:</b></p>
+<!-- First let's check to see if the user has any posts. We do this by checking if the post in the table is present. -->
+<% if @user.posts.last.present? %>
+  <div class="post">
+    <!-- Now we're going to loop through all of the users posts... -->
+    <% @user.posts.each do |post| %>
+      <!-- First print out the content of the post. -->
+      <p><%= post.content %></p>
+      <!-- Now we check to see if there's any comments on this post. We do this the same way as we do with the posts.. -->
+      <% if post.comments.last.present? %>
+        <p><i>Comments:</i></p>
+        <ul>
+          <!-- Now we're going to loop through the comments of the post -->
+          <% post.comments.each do |comment| %>
+            <!-- For each comment we're going to print out the comment then a link to the users profile -->
+            <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <!-- Now we'll check to see if a user is logged in. -->
+      <% if @current_user.present? %>
+        <!-- And if so we're going to let them make a comment. -->
+        <%= form_for @comment do |f| %>
+          <%= hidden_field_tag :post_id, post.id %>
+          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment_text_field' %>
+          <%= f.submit "Comment" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

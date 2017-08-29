@@ -4,7 +4,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render :index
+    if params[:search]
+      @users = User.search(params[:search]).order("created_at DESC")
+    else
+      @users = User.all.order("created_at DESC")
+    end
   end
 
   def new
@@ -40,8 +44,15 @@ class UsersController < ApplicationController
     user = User.find params[:id]
     User.destroy user.id
     @current_user = nil
-    
+
     redirect_to root_path
+  end
+
+  def show
+    @user = User.find params[:id]
+    @post = Post.new
+    @comment = Comment.new
+    render :show
   end
 
   private

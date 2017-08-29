@@ -18,6 +18,14 @@
         <%= link_to "Sign In", login_path %>
         <%= link_to "Sign Up", new_user_path %>
       <% end %>
+      <br>
+      <!-- Tutorial used for search bar: http://www.rymcmahon.com/articles/2 -->
+      <!-- This is the search bar. We use a form which goes through the user form. Form tag automotically submits a post request but we want to use a get request. -->
+      <%= form_tag(users_path, :method => 'get', id: "seach-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search for a user..." %>
+        <!-- For the submit button setting the name to nil will allow us to have nicer urls hat don't chuck on at the end &commit=search -->
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
     </nav>
     <%= yield %>
   </body>

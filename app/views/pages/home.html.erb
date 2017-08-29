@@ -16,9 +16,10 @@
       <% @current_user.posts.each do |post| %>
         <p><%= post.content %></p>
         <% if post.comments.last.present? %>
+          <p><i>Comments:</i></p>
           <ul>
             <% post.comments.each do |comment| %>
-              <li><%= comment.content %> | By <%= comment.user.username %></li>
+              <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %></li>
             <% end %>
           </ul>
         <% end %>

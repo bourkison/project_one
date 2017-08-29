@@ -21,4 +21,8 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+
+  def self.search(search)
+    where("username ILIKE ? OR firstname ILIKE ? OR lastname ILIKE ? OR email ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%") 
+  end
 end
