@@ -7,11 +7,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <nav>
       <div class="links">
-        <%= link_to "Home", root_path %>
+        <span class="navlink"><%= link_to "Home", root_path %></span>
         <% if @current_user.present? %>
           <span class="navlink"><%= link_to "My Profile", @current_user %></span>
           <span class="navlink"><%= link_to "Edit Profile", edit_user_path(@current_user) %></span>
@@ -23,7 +22,7 @@
       </div>
       <!-- Tutorial used for search bar: http://www.rymcmahon.com/articles/2 -->
       <!-- This is the search bar. We use a form which goes through the user form. Form tag automotically submits a post request but we want to use a get request. -->
-      <%= form_tag(users_path, :method => 'get', id: "seach-form") do %>
+      <%= form_tag(users_path, :method => 'get', id: "search-form") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Search for a user..." %>
         <!-- For the submit button setting the name to nil will allow us to have nicer urls hat don't chuck on at the end &commit=search -->
         <%= submit_tag "Search", :name => nil %>
