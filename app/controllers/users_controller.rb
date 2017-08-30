@@ -57,8 +57,12 @@ class UsersController < ApplicationController
 
   def following
     user = User.find params[:id]
-
-    @current_user.follow(user)
+    # As we call this method for both follow and unfollow, check to see if the current_user is already following the user, and if so unfollow them, if not follow them.
+    if @current_user.following?(user)
+      @current_user.unfollow(user)
+    else
+      @current_user.follow(user)
+    end
     redirect_to user
   end
 
