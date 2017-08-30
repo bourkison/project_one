@@ -10,16 +10,17 @@
 
   <body>
     <nav>
-      <%= link_to "Home", root_path %>
-      <% if @current_user.present? %>
-        <%= link_to "My Profile", @current_user %>
-        <%= link_to "Edit Profile", edit_user_path(@current_user) %>
-        <%= link_to "Sign Out", login_path, :method => 'delete' %>
-      <% else %>
-        <%= link_to "Sign In", login_path %>
-        <%= link_to "Sign Up", new_user_path %>
-      <% end %>
-      <br><br>
+      <div class="links">
+        <%= link_to "Home", root_path %>
+        <% if @current_user.present? %>
+          <span class="navlink"><%= link_to "My Profile", @current_user %></span>
+          <span class="navlink"><%= link_to "Edit Profile", edit_user_path(@current_user) %></span>
+          <span class="navlink"><%= link_to "Sign Out", login_path, :method => 'delete' %></span>
+        <% else %>
+          <span class="navlink"><%= link_to "Sign In", login_path %></span>
+          <span class="navlink"><%= link_to "Sign Up", new_user_path %></span>
+        <% end %>
+      </div>
       <!-- Tutorial used for search bar: http://www.rymcmahon.com/articles/2 -->
       <!-- This is the search bar. We use a form which goes through the user form. Form tag automotically submits a post request but we want to use a get request. -->
       <%= form_tag(users_path, :method => 'get', id: "seach-form") do %>
@@ -28,6 +29,8 @@
         <%= submit_tag "Search", :name => nil %>
       <% end %>
     </nav>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
