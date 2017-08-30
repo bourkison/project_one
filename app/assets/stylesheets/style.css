@@ -2,59 +2,117 @@
   box-sizing: border-box;
 }
 
+p, li {
+  font-family: 'Droid Sans', sans-serif;
+}
+
 body {
-  background-color: #333745
+  background-color: #FAFAFA;
 }
 
 .container {
-  width: 960px;
-  border-radius: .5em;
-  box-shadow: 0 0 10px black;
-  margin: auto;
-  background-color: #EEF5DB;
+  max-width: 650px;
+  margin: 77px auto 0 auto;
+  position: relative;
 }
 
 nav {
-  width: 960px;
-  margin: auto;
-  background-color: #E63462;
-  color: white;
-  border-radius: .5em;
-  box-shadow: 0 0 10px black;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.095);
+  height: 77px;
+  z-index: 1;
+}
+
+#home-div {
+  display: inline-block;
+  height: 100%
+}
+
+#home-div a {
+  line-height: 77px;
 }
 
 .links {
-  width: 70%;
-  line-height: 100%;
-  text-align: left;
-  display: inline-block;
-
-}
-
-nav form {
-  line-height: 100%;
   display: inline-block;
   float: right;
+  height: 100%;
 }
 
-.navlink {
-  display: inline-block;
-  height: 100px;
-  line-height: 100px;
-  background-color: black;
-  border-radius: .5em;
-  width: 20%;
-  margin: 2% .5%;
-  text-align: center;
+.home-link {
+  margin-left: 20px;
+}
+
+.links a {
+  line-height: 77px;
+  margin-right: 20px;
 }
 
 nav a {
-  line-height: 100%;
-  font-size: 20px;
-  line-height: 100%;
-  color: white;
+  color: black;
 }
 
-h1 {
+nav form {
+  width: 30%;
+  display: inline-block;
+  margin-left: 38%;
+}
+
+#search-field {
+  border: solid 1px #DBDBDB;
+  border-radius: 3px;
+  width: 60%;
+  min-width: 125px;
+  height: 30px;
+  background-color: #fafafa;
   text-align: center;
+  font-family: 'Droid Sans', serif;
+}
+
+#search-field:focus {
+  background-color: white;
+  text-align: left;
+  outline-width: 0;
+}
+
+
+
+#search-button {
+  display: none;
+}
+
+
+/* *******************************************
+
+    STYLING FOR PAGES#HOME (HOME.HTML.ERB)
+
+   ******************************************* */
+
+h1 {
+  font-family: 'Open Sans', serif;
+  text-align: center;
+}
+
+.post {
+  background-color: #FFFFFF;
+  border-radius: .2em;
+  margin: 10px;
+  box-shadow: 0 0 2px black;
+  padding: 10px;
+}
+
+.comment-text-field {
+  border: none;
+  width: 100%;
+  font-family: 'Droid Sans', serif;
+}
+
+.comment-text-field:focus {
+  outline-width: 0;
+}
+
+.comment-button {
+  display: none;
 }

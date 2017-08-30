@@ -26,9 +26,9 @@
 <p><b>Posts:</b></p>
 <!-- First let's check to see if the user has any posts. We do this by checking if the post in the table is present. -->
 <% if @user.posts.last.present? %>
-  <div class="post">
     <!-- Now we're going to loop through all of the users posts... -->
-    <% @user.posts.each do |post| %>
+  <% @user.posts.each do |post| %>
+    <div class="post">
       <!-- First print out the content of the post. -->
       <p><%= post.content %></p>
       <!-- Now we check to see if there's any comments on this post. We do this the same way as we do with the posts.. -->
@@ -47,12 +47,12 @@
         <!-- And if so we're going to let them make a comment. -->
         <%= form_for @comment do |f| %>
           <%= hidden_field_tag :post_id, post.id %>
-          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment_text_field' %>
-          <%= f.submit "Comment" %>
+          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment-text-field' %>
+          <%= f.submit "Comment", :class => 'comment-button' %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 

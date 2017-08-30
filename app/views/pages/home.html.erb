@@ -10,9 +10,9 @@
 
   <!-- First let's check to see if there are any posts to display. -->
   <% if @posts.first.present? %>
-    <div class="post">
       <!-- Now loop through all the posts. -->
-      <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
+      <div class="post">
         <!-- First pring the content. -->
         <p><%= post.content %></p>
         <p><%= link_to post.user.username, post.user %></p>
@@ -29,11 +29,11 @@
         <% end %>
         <%= form_for @comment do |f| %>
           <%= hidden_field_tag :post_id, post.id %>
-          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment_text_field' %>
-          <%= f.submit "Comment" %>
+          <%= f.text_field :content, :placeholder => 'Write a comment...', :class => 'comment-text-field' %>
+          <%= f.submit "Comment", :class => "comment-button" %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   <% else %>
     <p>There are no posts to show.</p>
   <% end %>
