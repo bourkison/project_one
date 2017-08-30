@@ -2,11 +2,17 @@
 
 <h1><%= @user.firstname %> <%= @user.lastname %></h1>
 
-<% if @current_user.present? && @current_user.id == @user.id %>
-  <p><b>New Post:</b></p>
-  <%= form_for @post do |f|  %>
-    <%= f.text_field :content, :placeholder => 'Post a meme', :class => 'post_text_field' %>
-    <%= f.submit "Post" %>
+
+
+<% if @current_user.present? %>
+  <% if @current_user.id == @user.id %>
+    <p><b>New Post:</b></p>
+    <%= form_for @post do |f|  %>
+      <%= f.text_field :content, :placeholder => 'Post a meme', :class => 'post_text_field' %>
+      <%= f.submit "Post" %>
+    <% end %>
+  <% else %>
+    <%= link_to "Follow User", following_user_path(@user) %>
   <% end %>
 <% end %>
 
@@ -41,4 +47,28 @@
       <% end %>
     <% end %>
   </div>
+<% end %>
+
+
+<!-- Now let's display the followers and following. First we will check to see if the user has any followers -->
+<p>Followers:</p>
+<% if @user.followers.first.present? %>
+  <ul>
+    <% @user.followers.each do |follower| %>
+      <li><%= link_to follower.username, follower %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><i>This user doesn't have any followers.</i></p>
+<% end %>
+
+<p>Following: </p>
+<% if @user.following.first.present? %>
+  <ul>
+    <% @user.following.each do |following| %>
+      <li><%= link_to following.username, following %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><i>This user is not following anyone.</i></p>
 <% end %>

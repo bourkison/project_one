@@ -55,6 +55,16 @@ class UsersController < ApplicationController
     render :show
   end
 
+  def following
+    user = User.find params[:id]
+
+    @current_user.follow(user)
+    redirect_to user
+  end
+
+  def followers
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :firstname, :lastname, :email, :dob, :password, :password_confirmation)
