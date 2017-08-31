@@ -1,17 +1,15 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: likes
 #
 #  id         :integer          not null, primary key
-#  content    :text
-#  image      :text
+#  post_id    :integer
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Post < ApplicationRecord
-  belongs_to :user, optional: true
-  has_many :comments
-  has_many :likes
+class Like < ApplicationRecord
+  belongs_to :user
+  belongs_to :post
 end

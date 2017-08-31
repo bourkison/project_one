@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
 
   def create
-
+    cloudinary = Cloudinary::Uploader.upload(params[:post][:image])
     @post = Post.new post_params
+    @post.image = cloudinary["url"]
+    @post.save
+
     @current_user.posts << @post
-    redirect_to root_path
+    redirect_to request.referer
   end
 
   private

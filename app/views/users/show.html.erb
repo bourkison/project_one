@@ -27,10 +27,20 @@
 <!-- First let's check to see if the user has any posts. We do this by checking if the post in the table is present. -->
 <% if @user.posts.last.present? %>
     <!-- Now we're going to loop through all of the users posts... -->
-  <% @user.posts.each do |post| %>
+  <% @user.posts.reverse.each do |post| %>
     <div class="post">
+      <% if post.image.present? %>
+        <%= image_tag post.image %>
+      <% end %>
       <!-- First print out the content of the post. -->
       <p><%= post.content %></p>
+      <p><i><%= post.created_at.strftime("%e %B, %Y, %X") %></i></p>
+      <p><%= post.likes.count %> likes</p>
+      <%= form_for @like do |f| %>
+        <%= hidden_field_tag :post_id, post.id %>
+        <%= f.button "Like" %>
+      <% end %><br>
+
       <!-- Now we check to see if there's any comments on this post. We do this the same way as we do with the posts.. -->
       <% if post.comments.last.present? %>
         <p><i>Comments:</i></p>

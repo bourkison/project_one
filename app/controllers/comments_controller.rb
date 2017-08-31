@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     post = Post.find params[:post_id]
     post.comments << @comment
 
-    redirect_to root_path
+    redirect_to request.referer
   end
 
   private

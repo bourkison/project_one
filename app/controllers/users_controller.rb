@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @post = Post.new
     @comment = Comment.new
+    @like = Like.new
     render :show
   end
 

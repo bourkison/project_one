@@ -26,6 +26,14 @@
 #                PATCH  /comments/:id(.:format)        comments#update
 #                PUT    /comments/:id(.:format)        comments#update
 #                DELETE /comments/:id(.:format)        comments#destroy
+#          likes GET    /likes(.:format)               likes#index
+#                POST   /likes(.:format)               likes#create
+#       new_like GET    /likes/new(.:format)           likes#new
+#      edit_like GET    /likes/:id/edit(.:format)      likes#edit
+#           like GET    /likes/:id(.:format)           likes#show
+#                PATCH  /likes/:id(.:format)           likes#update
+#                PUT    /likes/:id(.:format)           likes#update
+#                DELETE /likes/:id(.:format)           likes#destroy
 # following_user GET    /users/:id/following(.:format) users#following
 # followers_user GET    /users/:id/followers(.:format) users#followers
 #                GET    /users(.:format)               users#index
@@ -46,6 +54,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :comments
+  resources :likes
 
   resources :users do
     member do

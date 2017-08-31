@@ -34,6 +34,8 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap'
 
+gem 'cloudinary'
+
 group :production do
   gem 'rails_12factor'
 end
