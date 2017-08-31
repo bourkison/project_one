@@ -8,7 +8,8 @@
   <!-- Now check to see if the user is just checking his own profile. -->
   <% if @current_user.id == @user.id %>
     <p><b>New Post:</b></p>
-    <%= form_for @post do |f|  %>
+    <%= form_for(@post, :html => { :multipart => true }) do |f|  %>
+      <%= f.file_field :image %>
       <%= f.text_field :content, :placeholder => 'Post a meme', :class => 'post_text_field' %>
       <%= f.submit "Post" %>
     <% end %>
@@ -36,10 +37,20 @@
       <p><%= post.content %></p>
       <p><i><%= post.created_at.strftime("%e %B, %Y, %X") %></i></p>
       <p><%= post.likes.count %> likes</p>
-      <%= form_for @like do |f| %>
-        <%= hidden_field_tag :post_id, post.id %>
-        <%= f.button "Like" %>
-      <% end %><br>
+      <!-- We're going to go through the likes of this post, and see if the user has already liked it. If so we're going to set the variable @alreadyliked to true. -->
+      <% post.likes.each do |like| %>
+        <% if like[:user_id] == @current_user.id %>
+          <% @alreadyLiked = true %>
+        <% end %>
+      <% end %>
+      <% if @alreadyLiked == false %>
+        <%= form_for @like do |f| %>
+          <%= hidden_field_tag :post_id, post.id %>
+          <%= f.button "Like" %>
+        <% end %><br>
+      <% else %>
+        <%= button_to "Unlike", { :controller => "likes", :action => "destroy", :id => post.id }, :method => :delete %>
+      <% end %>
       <% if post.user == @current_user %>
         <%= link_to "Delete Post", post, :method => "delete" %>
       <% end %>

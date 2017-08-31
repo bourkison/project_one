@@ -25,6 +25,7 @@
         <p><i><%= post.created_at.strftime("%e %B, %Y, %X") %></i></p>
         <!-- Now let's first show the amount of likes, then add an option to like. -->
         <p><%= post.likes.count %> likes</p>
+        <!-- We're going to go through the likes of this post, and see if the user has already liked it. If so we're going to set the variable @alreadyliked to true. -->
         <% post.likes.each do |like| %>
           <% if like[:user_id] == @current_user.id %>
             <% @alreadyLiked = true %>

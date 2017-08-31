@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @like = Like.new
+    @alreadyLiked = false
     render :show
   end
 
