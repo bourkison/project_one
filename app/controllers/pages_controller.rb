@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @like = Like.new
+    @alreadyLiked = false
     # When we get to the home page, check if the user is logged in. If so, get the posts for it and chuck it in an array.
     if @current_user.present?
       # Start off by adding the own users posts to the array.

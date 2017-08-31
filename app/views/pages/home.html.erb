@@ -13,6 +13,7 @@
   <% if @posts.first.present? %>
       <!-- Now loop through all the posts. -->
     <% @posts.each do |post| %>
+      <% @alreadyLiked = false %>
       <div class="post">
         <!-- First lets check if there is an image the content. -->
         <% if post.image.present? %>
@@ -24,17 +25,29 @@
         <p><i><%= post.created_at.strftime("%e %B, %Y, %X") %></i></p>
         <!-- Now let's first show the amount of likes, then add an option to like. -->
         <p><%= post.likes.count %> likes</p>
-        <%= form_for @like do |f| %>
-          <%= hidden_field_tag :post_id, post.id %>
-          <%= f.button "Like" %>
-        <% end %><br>
+        <% post.likes.each do |like| %>
+          <% if like[:user_id] == @current_user.id %>
+            <% @alreadyLiked = true %>
+          <% end %>
+        <% end %>
+        <% if @alreadyLiked == false %>
+          <%= form_for @like do |f| %>
+            <%= hidden_field_tag :post_id, post.id %>
+            <%= f.button "Like" %>
+          <% end %><br>
+        <% else %>
+          <%= button_to "Unlike", { :controller => "likes", :action => "destroy", :id => post.id }, :method => :delete %>
+        <% end %>
+        <% if post.user == @current_user %>
+          <%= link_to "Delete Post", post, :method => "delete" %>
+        <% end %>
         <!-- Now check to see if there are any comments -->
         <% if post.comments.last.present? %>
           <p><i>Comments:</i></p>
           <ul>
             <!-- Loop through all the comments and print them bulleted underneath the post -->
             <% post.comments.each do |comment| %>
-              <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %></li>
+              <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %> <%= link_to("", comment, :method => "delete", :class => "fa fa-ban delete") if comment.user == @current_user %></li>
             <% end %>
           </ul>
         <% end %>
@@ -48,4 +61,6 @@
   <% else %>
     <p>There are no posts to show.</p>
   <% end %>
+<% else %>
+  <p>Welcome to Meme App! To get started please, <%= link_to "Login", login_path %> or <%= link_to "Sign Up", new_user_path %></p>
 <% end %>

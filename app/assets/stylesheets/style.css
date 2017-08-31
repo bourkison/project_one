@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-p, li {
+p, li, label {
   font-family: 'Droid Sans', sans-serif;
 }
 
@@ -107,6 +107,10 @@ img {
   padding: 10px;
 }
 
+.post p {
+
+}
+
 .comment-text-field {
   border: none;
   width: 100%;
@@ -119,4 +123,9 @@ img {
 
 .comment-button {
   display: none;
+}
+
+.delete {
+  color: black;
+  text-decoration: none;
 }

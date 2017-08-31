@@ -40,7 +40,9 @@
         <%= hidden_field_tag :post_id, post.id %>
         <%= f.button "Like" %>
       <% end %><br>
-
+      <% if post.user == @current_user %>
+        <%= link_to "Delete Post", post, :method => "delete" %>
+      <% end %>
       <!-- Now we check to see if there's any comments on this post. We do this the same way as we do with the posts.. -->
       <% if post.comments.last.present? %>
         <p><i>Comments:</i></p>
@@ -48,7 +50,7 @@
           <!-- Now we're going to loop through the comments of the post -->
           <% post.comments.each do |comment| %>
             <!-- For each comment we're going to print out the comment then a link to the users profile -->
-            <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %></li>
+            <li><%= comment.content %> | By <%= link_to comment.user.username, comment.user %> <%= link_to("", comment, :method => "delete", :class => "fa fa-ban delete") if comment.user == @current_user %></li>
           <% end %>
         </ul>
       <% end %>
